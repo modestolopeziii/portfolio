@@ -125,7 +125,7 @@ html, body {
  <div class="row">
   <div class="col-md-12">
    <h1 class="text-center hero-title">Modesto Lopez III</h1>
-   <h4 class="text-center hero-tagline">	</h4>
+   <h4 class="text-center hero-tagline"></h4>
   </div>
  </div>
  <div class="row">
