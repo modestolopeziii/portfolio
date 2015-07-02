@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE-edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="css/normalize.min.css" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <style>
-/* latin */
+/* latin */	
 @font-face {
   font-family: 'Yellowtail';
   font-style: normal;
@@ -14,45 +19,55 @@
 
 html, body {
  height: 100%;
+ transition: background 1s;
+}
+
+.dark {
+ background: rgba(0,0,0,1);
 }
 .container-nav {
  padding: 50px;
 }
 .container-nav span,
-.container-portfolio span {
+.container-portfolio-menu span {
  padding: 40px;
 }
 .container-nav span a,
-.container-portfolio span a {
+.container-portfolio-menu span a {
  color: #000;
 }
 .container-nav span a:hover {
  text-decoration: none;
 }
 .container-nav span a:hover:before {
- content: '< ';
+<!--  content: '< '; -->
  font-weight: bold;
 }
 .container-nav span a:hover:after {
- content: ' />';
+<!--  content: ' />'; -->
  font-weight: bold;
 }
 .container-hero {
  height: 500px;
 }
 .hero-title,
-.portfolio-title {
+.portfolio-item-title,
+.portfolio-title,
+.contact-title {
  font-family: 'Yellowtail', cursive;
 }
-.portfolio-title {
+.portfolio-item-title {
  top: 50%;
  position: relative;
  margin: 0;
  padding: 0;
  color: #FFF;
 }
-.hero-title {
+.hero-title,
+.portfolio-title,
+.contact-title {
  font-size: 70px;
+ margin-bottom: 10px;
 }
 .top-140 {
  margin-top: 140px;
@@ -71,7 +86,7 @@ html, body {
  padding: 10px 0;
  font-size: 18px;
 }
-.container-portfolio {
+.container-portfolio-menu {
  padding-top: 30px;
 }
 .portfolio-item {
@@ -90,12 +105,12 @@ html, body {
 .portfolio-item .wrap-fade:hover {
  background: rgba(51,51,51,0.5);
 }
-.portfolio-item .wrap-fade:hover .portfolio-title {
+.portfolio-item .wrap-fade:hover .portfolio-item-title {
  background: transparent;
  display: none;
 }
 
-.portfolio-item .wrap-fade .portfolio-title {
+.portfolio-item .wrap-fade .portfolio-item-title {
  transition: color .1s;
  -webkit-transition: color .3s;
 }
@@ -110,6 +125,7 @@ html, body {
  color: #333;
  animation: fade-down 3s infinite;
  -webkit-animation: fade-down 3s infinite;
+ font-size: 70px;
 }
 @-webkit-keyframes fade-down {
   0%   { opacity: 0; }
@@ -117,7 +133,7 @@ html, body {
 }
 @keyframes fade-down {
   0%   { opacity: 0; }
-  100% { opacity: 0.8; margin-top: 10px; }
+  100% { opacity: 1; margin-top: 10px; }
 }
 
 .typed-cursor{
@@ -141,17 +157,73 @@ html, body {
     50% { opacity:0; }
     100% { opacity:1; }
 }
+.container-contact input,
+.container-contact textarea {
+ border: 2px solid #333;
+ padding: 10px;
+ margin-bottom: 10px;
+ width: 50%;
+}
+
+.container-contact textarea {
+ height: 200px;
+}
+
+.container-contact input[type=submit] {
+ border: 2px solid #333;
+ background: #FFF;
+}
+.container-contact input[type=submit] {
+ transition: background .3s;
+}
+.container-contact input[type=submit]:hover {
+ border: 2px solid #333;
+ background: #333;
+ color: #fff;
+}
+
+.isotope-item {
+    z-index: 2;
+}
+.isotope-hidden.isotope-item {
+    pointer-events: none;
+    z-index: 1;
+}
+.isotope,
+.isotope .isotope-item {
+  /* change duration value to whatever you like */
+
+    -webkit-transition-duration: 0.8s;
+    -moz-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+}
+.isotope {
+    -webkit-transition-property: height, width;
+    -moz-transition-property: height, width;
+    transition-property: height, width;
+}
+.isotope .isotope-item {
+    -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property: -moz-transform, opacity;
+    transition-property: transform, opacity;
+}
 </style>
 </head>
 <body>
 
 <div class="container-fluid">
  <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-6">
+  <nav class="pull-left container-nav">
+   <span><a href="#" class="light-menu">Light</a></span>
+   <span><a href="#" class="dark-menu">Dark</a></span>
+  </nav>
+  </div>
+  <div class="col-md-6">
   <nav class="pull-right container-nav">
    <span><a href="#">About</a></span>
    <span><a data-scroll data-options='{ "easing": "easeInQuad" }' href="#portfolio">Works</a></span>
-   <span><a href="#">Contact</a></span>
+   <span><a data-scroll data-options='{ "easing": "easeInQuad" }' href="#contact">Contact</a></span>
   </nav>
   </div>
  </div>
@@ -168,110 +240,122 @@ html, body {
  <div class="row">
   <div class="container text-center top-80">
    <a data-scroll data-options='{ "easing": "easeInQuad" }' href="#portfolio">
-   <svg class="icon-arrow-down" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-   <polygon points="396.6,160 416,180.7 256,352 96,180.7 115.3,160 256,310.5 "/>
-   </svg>
+   <i class="fa fa-chevron-down icon-arrow-down"></i>
    </a>
   </div>
  </div>
 </div>
 
-<div class="container-fluid top-20">
+<div class="container-fluid top-20 text-center" id="portfolio">
  <div class="row">
-  <div class="container container-portfolio text-center" id="portfolio">
-   <span><a href="#">All</a></span> /
-   <span><a href="#">HTML5</a></span> /
-   <span><a href="#">E-commerce</a></span> /
-   <span><a href="#">WordPress</a></span> /
-   <span><a href="#">Shopify</a></span> /
-   <span><a href="#">Speed Optimization</a></span> /
-   <span><a href="#">App</a></span>
+  <h1 class="portfolio-title">Portfolio</h1>
+  <div class="container container-portfolio-menu text-center">
+   <span><a data-filter="*" href="#" class="current">All</a></span> /
+   <span><a data-filter=".html5" href="#">HTML5</a></span> /
+   <span><a data-filter=".ecommerce" href="#">E-commerce</a></span> /
+   <span><a data-filter=".wordpress" href="#">WordPress</a></span> /
+   <span><a data-filter=".shopify" href="#">Shopify</a></span> /
+   <span><a data-filter=".speed-optimization" href="#">Speed Optimization</a></span> /
+   <span><a data-filter=".app" href="#">App</a></span>
   </div>
  </div>
- <div class="row top-20 text-center">
-  <div class="col-md-4 portfolio-item">
+ <div class="row top-20 text-center container-portfolio-item">
+  <div class="col-md-3 col-xs-6 portfolio-item all wordpress">
    <div class="wrap-fade">
-	 <h1 class="portfolio-title">Creative Being Inc.</h1>
+	 <h1 class="portfolio-item-title">Creative Being Inc.</h1>
    </div>
    <img src="images/portfolio-1.png" width="600" height="400" class="img-responsive" />
   </div>
-  <div class="col-md-4 portfolio-item">
+  <div class="col-md-3 col-xs-6 portfolio-item  all wordpress">
    <div class="wrap-fade">
-	 <h1 class="portfolio-title">Vistaland USA</h1>
+	 <h1 class="portfolio-item-title">Vistaland USA</h1>
    </div>
    <img src="images/portfolio-2.png" width="600" height="400" class="img-responsive" />
   </div>
-  <div class="col-md-4 portfolio-item">
+  <div class="col-md-3 col-xs-6 portfolio-item all wordpress">
    <div class="wrap-fade">
-	 <h1 class="portfolio-title">Get Zeal Today</h1>
+	 <h1 class="portfolio-item-title">Get Zeal Today</h1>
    </div>
    <img src="images/portfolio-3.png" width="600" height="400" class="img-responsive" />
   </div>
-  <div class="col-md-4 portfolio-item">
+  <div class="col-md-3 col-xs-6 portfolio-item all wordpress">
    <div class="wrap-fade">
-	 <h1 class="portfolio-title">XYZ Global Express Inc.</h1>
+	 <h1 class="portfolio-item-title">XYZ Global Express Inc.</h1>
    </div>
    <img src="images/portfolio-4.png" width="600" height="400" class="img-responsive" />
   </div>
-  <div class="col-md-4 portfolio-item">
+  <div class="col-md-3 col-xs-6 portfolio-item all wordpress">
    <div class="wrap-fade">
-	 <h1 class="portfolio-title">Superior Golf Works</h1>
+	 <h1 class="portfolio-item-title">Superior Golf Works</h1>
    </div>
    <img src="images/portfolio-5.png" width="600" height="400" class="img-responsive" />
   </div>
-  <div class="col-md-4 portfolio-item">
+  <div class="col-md-3 col-xs-6 portfolio-item all wordpress">
    <div class="wrap-fade">
-	 <h1 class="portfolio-title">Zuric Pension House</h1>
+	 <h1 class="portfolio-item-title">Zuric Pension House</h1>
    </div>
    <img src="images/portfolio-6.png" width="600" height="400" class="img-responsive" />
   </div>
-  <div class="col-md-4 portfolio-item">
+  <div class="col-md-3 col-xs-6 portfolio-item all wordpress speed-optimization">
    <div class="wrap-fade">
-	 <h1 class="portfolio-title">Rachel Rose Jewelry</h1>
+	 <h1 class="portfolio-item-title">Rachel Rose Jewelry</h1>
    </div>
    <img src="images/portfolio-7.png" width="600" height="400" class="img-responsive" />
   </div>
-  <div class="col-md-4 portfolio-item">
+  <div class="col-md-3 col-xs-6 portfolio-item all wordpress">
    <div class="wrap-fade">
-	 <h1 class="portfolio-title">Immaculate Living Inc</h1>
+	 <h1 class="portfolio-item-title">Immaculate Living Inc</h1>
    </div>
    <img src="images/portfolio-8.png" width="600" height="400" class="img-responsive" />
   </div>
-  <div class="col-md-4 portfolio-item">
+  <div class="col-md-3 col-xs-6 portfolio-item all wordpress">
    <div class="wrap-fade">
-	 <h1 class="portfolio-title">Chef Gourmet LLC</h1>
+	 <h1 class="portfolio-item-title">Chef Gourmet LLC</h1>
    </div>
    <img src="images/portfolio-9.png" width="600" height="400" class="img-responsive" />
   </div>
-  <div class="col-md-4 portfolio-item">
+  <div class="col-md-3 col-xs-6 portfolio-item all wordpress">
    <div class="wrap-fade">
-	 <h1 class="portfolio-title">Becoming By Emily</h1>
+	 <h1 class="portfolio-item-title">Becoming By Emily</h1>
    </div>
    <img src="images/portfolio-10.png" width="600" height="400" class="img-responsive" />
   </div>
-  <div class="col-md-4 portfolio-item">
+  <div class="col-md-3 col-xs-6 portfolio-item all wordpress">
    <div class="wrap-fade">
-	 <h1 class="portfolio-title">Balikbayan Info Center</h1>
+	 <h1 class="portfolio-item-title">Balikbayan Info Center</h1>
    </div>
    <img src="images/portfolio-11.png" width="600" height="400" class="img-responsive" />
+  </div>
+  <div class="col-md-3 col-xs-6 portfolio-item all shopify">
+   <div class="wrap-fade">
+	 <h1 class="portfolio-item-title">The Looseteas Cafe and Gifts</h1>
+   </div>
+   <img src="images/portfolio-12.png" width="600" height="400" class="img-responsive" />
   </div>
  </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid text-center container-contact" id="contact">
+ <div class="row">
+  <div class="col-md-12">
+   <h1 class="contact-title">Contact me</h1>
+  </div>
+ </div>
  <div class="row">
   <form action="//formspree.io/modestolopeziii@gmail.com"
       method="POST">
-    <input type="text" name="name">
-    <input type="email" name="_replyto">
+    <input type="text" name="name" placeholder="Your name"> <br />
+    <input type="email" name="_replyto" placeholder="Your email address"> <br />
+    <textarea type="text" name="message" placeholder="Your message"></textarea> <br />
     <input type="submit" value="Send">
   </form>
  </div>
 </div>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/smooth-scroll.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>	
 <script src="js/typed.js"></script>
+<script src="js/jquery.isotope.js"></script>
 <script>
 smoothScroll.init({
  speed: 1000,
@@ -281,12 +365,53 @@ smoothScroll.init({
  callbackBefore: function ( toggle, anchor ) {},
  callbackAfter: function ( toggle, anchor ) {}
 });
+
 $(function(){
  $(".hero-tagline").typed({
-  strings: ["A mother fucking Web Developer."],
-  typeSpeed: 1
+  strings: ["Hi! I am Web developer", "COMMUNICATE. DEVELOP. LAUNCH"],
+  typeSpeed: 90
  });
 });
+
+$(window).load(function(){
+    var $container = $('.container-portfolio-item');
+    $container.isotope({
+        filter: '*',
+        animationOptions: {
+            duration: 750,
+            easing: 'linear',
+            queue: false
+        }
+    });
+ 
+    $('.container-portfolio-menu span a').click(function(){
+        $('.container-portfolio-menu .current').removeClass('current');
+        $(this).addClass('current');
+ 
+        var selector = $(this).attr('data-filter');
+        $container.isotope({
+            filter: selector,
+            animationOptions: {
+                duration: 750,
+                easing: 'linear',
+                queue: false
+            }
+         });
+         return false;
+    }); 
+});
+
+$(".dark-menu").on('click', function(){
+ $("body").addClass("dark");
+ $("*").css('color','#fff');
+ $("input").css({'color':'#333','border-color':'white'});
+ $("input[type=submit]").css({'background':'#fff','color:':'white'});
+});
+$(".light-menu").on('click', function(){
+ $("body").removeClass("dark");
+ $("*").css('color','');
+});
+
 </script>
 </body>
 </html>
