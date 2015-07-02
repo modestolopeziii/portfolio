@@ -40,8 +40,18 @@ html, body {
 .container-hero {
  height: 500px;
 }
-.hero-title {
+.hero-title,
+.portfolio-title {
  font-family: 'Yellowtail', cursive;
+}
+.portfolio-title {
+ top: 50%;
+ position: relative;
+ margin: 0;
+ padding: 0;
+ color: #FFF;
+}
+.hero-title {
  font-size: 70px;
 }
 .top-140 {
@@ -67,10 +77,27 @@ html, body {
 .portfolio-item {
  transition: background .5s;
  -webkit-transition: background .5s;
+ padding: 0;
 }
 .portfolio-item .wrap-fade {
- z-index: 999999999;
- background: #282828;
+ background: rgba(51,51,51,0.9);
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ transition: background .6s;
+ -webkit-transition: background .6s;
+}
+.portfolio-item .wrap-fade:hover {
+ background: rgba(51,51,51,0.5);
+}
+.portfolio-item .wrap-fade:hover .portfolio-title {
+ background: transparent;
+ display: none;
+}
+
+.portfolio-item .wrap-fade .portfolio-title {
+ transition: color .1s;
+ -webkit-transition: color .3s;
 }
 .portfolio-item img {
  z-index: -9999999;
@@ -154,27 +181,73 @@ html, body {
   <div class="container container-portfolio text-center" id="portfolio">
    <span><a href="#">All</a></span> /
    <span><a href="#">HTML5</a></span> /
+   <span><a href="#">E-commerce</a></span> /
    <span><a href="#">WordPress</a></span> /
    <span><a href="#">Shopify</a></span> /
    <span><a href="#">Speed Optimization</a></span> /
-   <span><a href="#">Web app</a></span>
+   <span><a href="#">App</a></span>
   </div>
  </div>
- <div class="row top-20">
+ <div class="row top-20 text-center">
   <div class="col-md-4 portfolio-item">
    <div class="wrap-fade">
-   <img src="images/portfolio-1.png" width="600" height="400" class="img-responsive" />
+	 <h1 class="portfolio-title">Creative Being Inc.</h1>
    </div>
+   <img src="images/portfolio-1.png" width="600" height="400" class="img-responsive" />
   </div>
   <div class="col-md-4 portfolio-item">
+   <div class="wrap-fade">
+	 <h1 class="portfolio-title">Vistaland USA</h1>
+   </div>
    <img src="images/portfolio-2.png" width="600" height="400" class="img-responsive" />
   </div>
   <div class="col-md-4 portfolio-item">
+   <div class="wrap-fade">
+	 <h1 class="portfolio-title">Get Zeal Today</h1>
+   </div>
    <img src="images/portfolio-3.png" width="600" height="400" class="img-responsive" />
   </div>
   <div class="col-md-4 portfolio-item">
+   <div class="wrap-fade">
+	 <h1 class="portfolio-title">XYZ Global Express Inc.</h1>
+   </div>
    <img src="images/portfolio-4.png" width="600" height="400" class="img-responsive" />
   </div>
+  <div class="col-md-4 portfolio-item">
+   <div class="wrap-fade">
+	 <h1 class="portfolio-title">Superior Golf Works</h1>
+   </div>
+   <img src="images/portfolio-5.png" width="600" height="400" class="img-responsive" />
+  </div>
+  <div class="col-md-4 portfolio-item">
+   <div class="wrap-fade">
+	 <h1 class="portfolio-title">Zuric Pension House</h1>
+   </div>
+   <img src="images/portfolio-6.png" width="600" height="400" class="img-responsive" />
+  </div>
+  <div class="col-md-4 portfolio-item">
+   <div class="wrap-fade">
+	 <h1 class="portfolio-title">Rachel Rose Jewelry</h1>
+   </div>
+   <img src="images/portfolio-7.png" width="600" height="400" class="img-responsive" />
+  </div>
+  <div class="col-md-4 portfolio-item">
+   <div class="wrap-fade">
+	 <h1 class="portfolio-title">Immaculate Living Inc</h1>
+   </div>
+   <img src="images/portfolio-8.png" width="600" height="400" class="img-responsive" />
+  </div>
+  <div class="col-md-4 portfolio-item">
+   <div class="wrap-fade">
+	 <h1 class="portfolio-title">Chef Gourmet LLC</h1>
+   </div>
+   <img src="images/portfolio-9.png" width="600" height="400" class="img-responsive" />
+  </div>
+ </div>
+</div>
+
+<div class="container-fluid">
+ <div class="row">
  </div>
 </div>
 <script src="js/bootstrap.min.js"></script>
